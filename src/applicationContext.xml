@@ -7,16 +7,21 @@
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context.xsd">
  
+<!-- configuring properties file -->
 <context:property-placeholder location="classpath:sport.properties"/>
+<!-- creating beans and configuring init and destroy method  -->
 <bean id="myFortune" class="com.sooriya.HappyFortuneService" init-method="fortuneServiceInitMethod"
                                           destroy-method="fortuneServiceDestroyMethod">
 </bean>
  <bean id="myTime" class="com.sooriya.DailyWorkoutTime" init-method="workoutTimeInitMethod"
                        destroy-method="workoutTimeInitMethod"/>
-<bean id="myCoach" class="com.sooriya.TrackCoach" scope="singleton" init-method="coachInitMethod"
+<bean id="myCoach" class="com.sooriya.BaseballCoach" scope="singleton" init-method="coachInitMethod"
                                destroy-method="coachDestroyMethod">
+<!-- injecting dependences - constructor injection (secondary type)  -->
 <constructor-arg ref="myFortune"/>
+<!-- setter injection - secondary type -->
 <property name="workoutTime" ref="myTime"/>
+<!-- setter injection (primary type)  -->
 <property name="name" value="Sooriya"/>
 <property name="email" value="${email}"/>
 </bean>
